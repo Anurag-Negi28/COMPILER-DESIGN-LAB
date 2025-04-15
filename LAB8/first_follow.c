@@ -30,20 +30,22 @@ char findFirst(char *prod)
 
             while (prod[i] != '/' && prod[i] != '\0')
                 i++;
+            return prod[i]; // Return the terminal character
         }
         else if (prod[i] >= 65 && prod[i] <= 90)
         {
             printf("  %c", findFirst(productions[findPos(prod[i])]));
-            return;
+            return findFirst(productions[findPos(prod[i])]); // Return the result of recursive call
         }
         else if (prod[i] == '#')
         {
             printf("  #");
+            return '#'; // Return '#' for epsilon
         }
         else
             continue;
     }
-    return;
+    return '\0'; // Return null character if no valid return condition is met
 }
 
 void findFollow(char GeneratingSymbol, int n)
